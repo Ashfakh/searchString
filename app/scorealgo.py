@@ -1,6 +1,6 @@
 #Scoring Algo
 
-from suggestutils import SuggestRule  # import the module
+from app.suggestutils import SuggestRule  # import the module
 
 class ScoreSuggestions(object):
 

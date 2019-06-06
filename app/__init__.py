@@ -1,6 +1,6 @@
 import os
-from suggestutils import SuggestObj, SuggestRule  # import the module
-from scorealgo import ScoreSuggestions
+from app.suggestutils import SuggestObj, SuggestRule  # import the module
+from app.scorealgo import ScoreSuggestions
 from flask import Flask
 from flask import request
 import json
@@ -11,6 +11,18 @@ app = Flask(__name__)
 max_edit_distance_dictionary = 2
 prefix_length = 7
 suggest_obj = SuggestObj(max_edit_distance_dictionary, prefix_length)
+def init():
+    # load corpus
+    print("loading dictionary")
+    dictionary_path = os.path.join(os.path.dirname(__file__),
+                                   "dict.txt")
+    term_index = 0
+    count_index = 1
+    if not suggest_obj.load_corpus(dictionary_path, term_index, count_index):
+        print("Dictionary file not found")
+        return
+init()
+
 
 @app.route("/search")
 def hello():
@@ -19,6 +31,7 @@ def hello():
     return "param word has to be present"
 
 def search(suggest_obj,input_word):
+    print(suggest_obj)
     max_edit_distance_lookup = 2
     
     #SUggestion based on PREFIX rule
@@ -29,8 +42,8 @@ def search(suggest_obj,input_word):
     suggestions3 = suggest_obj.lookup(input_word,max_edit_distance_lookup)
     suggestions=suggestions1+suggestions2+suggestions3
 
-    # for suggestion in suggestions:
-    #     print("Suggestions are : "+str(suggestion))
+    for suggestion in suggestions:
+        print("Suggestions are : "+str(suggestion))
 
     suggestion_set = set(suggestions)
     suggestion_set = list(suggestion_set)
@@ -42,9 +55,9 @@ def search(suggest_obj,input_word):
 
     scored_set = scoreObj.getScoredList(suggestion_set)
 
-    # print("scored_set is --")
-    # for suggestion in scored_set:
-    #     print(str(suggestion))
+    print("scored_set is --")
+    for suggestion in scored_set:
+        print(str(suggestion))
     return getjson(scored_set)
 
 def getjson(suggestions):
@@ -55,16 +68,7 @@ def getjson(suggestions):
     data['suggestions'] = suggestions_list
     return json.dumps(data)
 
-def init():
-    # load corpus
-    dictionary_path = os.path.join(os.path.dirname(__file__),
-                                   "dict.txt")
-    term_index = 0
-    count_index = 1
-    if not suggest_obj.load_corpus(dictionary_path, term_index, count_index):
-        print("Dictionary file not found")
-        return
-
 if __name__ == "__main__":
+    print("yaaay")
     init()
     app.run(debug=True)

@@ -3,7 +3,7 @@ from enum import Enum
 import os.path
 import re
 
-from distancealgo import EditDistance
+from app.distancealgo import EditDistance
 
 class SuggestRule(Enum):
     EDITDIST = 0  #Edit distance rule
