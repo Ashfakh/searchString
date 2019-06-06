@@ -70,5 +70,6 @@ def getjson(suggestions):
     return json.dumps(data)
 
 if __name__ == "__main__":
+    print("Running app")
     init.init()
     app.run(debug=True)
