@@ -24,7 +24,7 @@ class Initialize(object):
         return
 # init()
 init = Initialize()
-init.init()
+# init.init()
 
 @app.route("/search")
 def hello():
@@ -55,7 +55,7 @@ def search(suggest_obj,input_word):
     suggestion_limit=25
     scoreObj = ScoreSuggestions(suggestion_limit)
 
-    scored_set = scoreObj.getScoredList(suggestion_set)
+    scored_set = scoreObj.getScoredList(suggestion_set,input_word)
 
     print("scored_set is --")
     for suggestion in scored_set:

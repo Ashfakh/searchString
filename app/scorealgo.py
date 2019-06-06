@@ -1,6 +1,7 @@
 #Scoring Algo
 
 from app.suggestutils import SuggestRule  # import the module
+import jellyfish
 
 class ScoreSuggestions(object):
 
@@ -8,11 +9,11 @@ class ScoreSuggestions(object):
     def __init__(self, limit):
         self.limit = limit
 
-    def getScoredList(self,suggestions):
-        return sorted(suggestions, key=lambda s: self.scoring(s))[0:self.limit]
+    def getScoredList(self,suggestions,phrase):
+        return sorted(suggestions, key=lambda s: self.scoring(s,phrase))[0:self.limit]
 
     #TODO: Improve scoring
-    def scoring(self,suggestion):
+    def scoring(self,suggestion,phrase):
         score = 0;
         if(suggestion.distance == 0):
             score += 2000;
@@ -27,6 +28,10 @@ class ScoreSuggestions(object):
         score += suggestion.count/100000000
         if(suggestion.count < 100000):
             score -= 10000000/suggestion.count
+        if(jellyfish.metaphone(suggestion.term) == jellyfish.metaphone(phrase)):
+            score += 50
+        # print(jellyfish.metaphone(suggestion.term))
+        # print(jellyfish.metaphone(phrase))
         # if(suggestion.count>10000000000):
         #     score += 200
         # if(suggestion.count>1000000000 and suggestion.count< 10000000000):
