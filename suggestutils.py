@@ -12,19 +12,6 @@ class SuggestRule(Enum):
 
 
 class SuggestObj(object):
-    """Symmetric Delete spelling correction algorithm
-    **Attributes**:
-    * _words: Dictionary of unique correct spelling words, and the\
-        frequency count for each word.
-        below the count threshold for being considered correct spellings.
-    * _deletes: Dictionary that contains a mapping of lists of\
-        suggested correction words to the hashCodes of the original\
-        words and the deletes derived from them. Collisions of\
-        hashCodes is tolerated, because suggestions are ultimately\
-        verified via an edit distance function. A list of suggestions\
-        might have a single suggestion, or multiple suggestions.
-            checking
-    """
 
     #Constructor
     def __init__(self, max_dictionary_edit_distance=2, prefix_length=7):
@@ -89,7 +76,7 @@ class SuggestObj(object):
 
         # if len(suggestions) > 1:
         #     suggestions.sort()
-        return suggestions[0:25]
+        return suggestions[0:50]
 
     def sub_string(self,sub_str):
         suggestions = list()
@@ -105,7 +92,7 @@ class SuggestObj(object):
 
         # if len(suggestions) > 1:
         #     suggestions.sort()
-        return suggestions[0:25]
+        return suggestions[0:50]
     
     #Lokkup function for the phrase from dictionary with given edit dist
     def lookup(self, phrase, max_edit_distance=None):
@@ -252,7 +239,7 @@ class SuggestObj(object):
         if len(suggestions) > 1:
             suggestions.sort()
         exit_now()
-        return suggestions[0:25]
+        return suggestions[0:50]
 
     #Only does deletion, no transpose, insert or replace. based on the meet in the middle technique of symspell algorithm
     def edits_delete(self, word, edit_distance, delete_words):
