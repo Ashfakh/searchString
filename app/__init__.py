@@ -11,16 +11,26 @@ app = Flask(__name__)
 max_edit_distance_dictionary = 2
 prefix_length = 7
 suggest_obj = SuggestObj(max_edit_distance_dictionary, prefix_length)
-def init():
-    # load corpus
-    print("loading dictionary")
-    dictionary_path = os.path.join(os.path.dirname(__file__),
+
+print("loading dictionary")
+dictionary_path = os.path.join(os.path.dirname(__file__),
                                    "dict.txt")
-    term_index = 0
-    count_index = 1
-    if not suggest_obj.load_corpus(dictionary_path, term_index, count_index):
-        print("Dictionary file not found")
-        return
+term_index = 0
+count_index = 1
+if not suggest_obj.load_corpus(dictionary_path, term_index, count_index):
+    print("Dictionary file not found")
+
+
+# def init():
+#     # load corpus
+#     print("loading dictionary")
+#     dictionary_path = os.path.join(os.path.dirname(__file__),
+#                                    "dict.txt")
+#     term_index = 0
+#     count_index = 1
+#     if not suggest_obj.load_corpus(dictionary_path, term_index, count_index):
+#         print("Dictionary file not found")
+#         return
 # init()
 
 
@@ -70,5 +80,5 @@ def getjson(suggestions):
 
 if __name__ == "__main__":
     print("yaaay")
-    init()
+    # init()
     app.run(debug=True)
