@@ -60,6 +60,8 @@ class SuggestObj(object):
                     count = int(line_parts[count_index])
                     if count is not None:
                         self.create_dictionary_entry(key, count)
+        print("Dictionary loaded with size : "+ str(len(self.words)))
+        print("Deletes loaded with size : "+ str(len(self.deletes_dict)))
         return True
 
     def prefix_list(self,prefix):
