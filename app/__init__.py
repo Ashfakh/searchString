@@ -24,6 +24,7 @@ class Initialize(object):
         return
 # init()
 init = Initialize()
+init.init()
 
 @app.route("/search")
 def hello():
