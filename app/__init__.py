@@ -21,7 +21,7 @@ def init():
     if not suggest_obj.load_corpus(dictionary_path, term_index, count_index):
         print("Dictionary file not found")
         return
-init()
+# init()
 
 
 @app.route("/search")
@@ -70,5 +70,5 @@ def getjson(suggestions):
 
 if __name__ == "__main__":
     print("yaaay")
-    # init()
+    init()
     app.run(debug=True)
