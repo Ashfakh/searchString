@@ -70,5 +70,5 @@ def getjson(suggestions):
 
 if __name__ == "__main__":
     print("yaaay")
-    init()
+    # init()
     app.run(debug=True)
