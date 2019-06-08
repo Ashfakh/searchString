@@ -16,13 +16,13 @@ class Initialize(object):
     def init(self):
     # load corpus
         print("loading dictionary")
-        dictionary_path = os.path.join(os.path.dirname(__file__),"dict.txt")
+        dictionary_path = os.path.join(os.path.dirname(__file__),"word_search.tsv")
         term_index = 0
         count_index = 1
         if not suggest_obj.load_corpus(dictionary_path, term_index, count_index):
             print("Dictionary file not found")
         return
-# init()
+# Initialize
 init = Initialize()
 init.init()
 

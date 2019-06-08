@@ -30,19 +30,5 @@ class ScoreSuggestions(object):
             score -= 10000000/suggestion.count
         if(jellyfish.metaphone(suggestion.term) == jellyfish.metaphone(phrase)):
             score += 50
-        # print(jellyfish.metaphone(suggestion.term))
-        # print(jellyfish.metaphone(phrase))
-        # if(suggestion.count>10000000000):
-        #     score += 200
-        # if(suggestion.count>1000000000 and suggestion.count< 10000000000):
-        #     score += 150
-        # if(suggestion.count>100000000 and suggestion.count< 1000000000):
-        #     score += 100
-        # if(suggestion.count>10000000 and suggestion.count< 100000000):
-        #     score += 50
-        # if(suggestion.count>1000000 and suggestion.count< 10000000):
-        #     score += 25
-        # if(suggestion.count>100000 and suggestion.count< 1000000):
-        #     score += 25
         print(str(suggestion)+ "score is : " + str(score))
         return score*-1
