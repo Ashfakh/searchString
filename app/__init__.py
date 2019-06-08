@@ -27,10 +27,14 @@ init = Initialize()
 init.init()
 
 @app.route("/search")
-def hello():
+def search():
     if 'word' in request.args:
         return search(suggest_obj,request.args['word']) 
     return "param word has to be present"
+
+@app.route("/")
+def root(): 
+    return "Usage is $host_name/search?word=$string"
 
 def search(suggest_obj,input_word):
     print(suggest_obj)
